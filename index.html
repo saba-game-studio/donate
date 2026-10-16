@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>حمایت از Saba Game Studio</title>
+<meta name="description" content="از ساخت بازی‌های آموزشی و نوستالژیک Saba Game Studio حمایت کنید.">
+<meta property="og:title" content="حمایت از Saba Game Studio">
+<meta property="og:description" content="با یک دونیت کوچک، بازی بعدی زودتر به دست بچه‌ها می‌رسد.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+<style>
+/* ======================================================
+   ✏️  فقط این بخش را ویرایش کنید: آدرس کیف پول‌ها در اسکریپت پایین صفحه (CONFIG)
+   ====================================================== */
+:root{
+  --bg:#07060f; --ink:#f4f1ff; --muted:#a59fc4; --line:rgba(255,255,255,.09);
+  --glass:rgba(255,255,255,.045); --glass2:rgba(255,255,255,.08);
+  --a1:#ff6b6b; --a2:#ffb86b; --a3:#7c5cff; --a4:#2de2c4;
+  --radius:26px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Vazirmatn",system-ui,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;overflow-x:hidden;line-height:1.8}
+a{color:inherit}
+
+/* ---------- animated backdrop ---------- */
+.sky{position:fixed;inset:0;z-index:-2;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.55;animation:float 18s ease-in-out infinite}
+.b1{width:520px;height:520px;background:var(--a3);top:-160px;right:-120px}
+.b2{width:460px;height:460px;background:var(--a1);bottom:-180px;left:-120px;animation-delay:-6s}
+.b3{width:340px;height:340px;background:var(--a4);top:40%;left:45%;opacity:.25;animation-delay:-12s}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(60px,-40px) scale(1.1)}66%{transform:translate(-50px,50px) scale(.95)}}
+.grid{position:fixed;inset:0;z-index:-1;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse at 50% 30%,#000 20%,transparent 70%);opacity:.5}
+canvas#stars{position:fixed;inset:0;z-index:-1;pointer-events:none}
+
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 60px}
+
+/* ---------- top bar ---------- */
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:-.2px}
+.logo{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:22px;background:conic-gradient(from 200deg,var(--a1),var(--a2),var(--a4),var(--a3),var(--a1));box-shadow:0 8px 30px -8px var(--a3)}
+.lang{border:1px solid var(--line);background:var(--glass);color:var(--ink);padding:8px 16px;border-radius:999px;font:600 13px "Vazirmatn";cursor:pointer;backdrop-filter:blur(10px);transition:.2s}
+.lang:hover{background:var(--glass2)}
+
+/* ---------- hero ---------- */
+.hero{text-align:center;padding:70px 0 40px}
+.pill{display:inline-flex;gap:8px;align-items:center;padding:6px 16px;border-radius:999px;border:1px solid var(--line);background:var(--glass);font-size:13px;color:var(--muted);backdrop-filter:blur(10px)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--a4);box-shadow:0 0 12px var(--a4);animation:pulse 1.8s infinite}
+@keyframes pulse{50%{opacity:.35}}
+h1{font-size:clamp(34px,6.4vw,72px);font-weight:900;line-height:1.25;margin:22px 0 18px;letter-spacing:-1px}
+.grad{background:linear-gradient(90deg,var(--a2),var(--a1),var(--a3),var(--a4),var(--a2));background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 8s linear infinite}
+@keyframes shine{to{background-position:300% 0}}
+.lead{max-width:640px;margin:0 auto;color:var(--muted);font-size:clamp(15px,2vw,18px)}
+.cta{display:inline-flex;align-items:center;gap:10px;margin-top:34px;padding:16px 34px;border-radius:999px;border:0;font:800 17px "Vazirmatn";color:#1a0f1f;cursor:pointer;text-decoration:none;background:linear-gradient(135deg,var(--a2),var(--a1));box-shadow:0 18px 50px -14px var(--a1),inset 0 -3px 0 rgba(0,0,0,.15);transition:transform .25s,box-shadow .25s}
+.cta:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 26px 60px -12px var(--a1)}
+.heart{display:inline-block;animation:beat 1.2s infinite}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.25)}30%{transform:scale(1)}}
+
+/* ---------- floating game icons ---------- */
+.toys{position:relative;height:0}
+.toy{position:absolute;font-size:34px;opacity:.85;animation:bob 6s ease-in-out infinite;filter:drop-shadow(0 10px 20px rgba(0,0,0,.4))}
+@keyframes bob{50%{transform:translateY(-18px) rotate(8deg)}}
+
+/* ---------- stats ---------- */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:30px 0 70px}
+.stat{padding:22px;border-radius:var(--radius);background:var(--glass);border:1px solid var(--line);text-align:center;backdrop-filter:blur(14px)}
+.stat b{display:block;font-size:30px;font-weight:900}
+.stat span{color:var(--muted);font-size:14px}
+
+/* ---------- section ---------- */
+.sec-title{text-align:center;font-size:clamp(24px,3.6vw,36px);font-weight:900;margin-bottom:8px}
+.sec-sub{text-align:center;color:var(--muted);margin-bottom:34px}
+
+/* ---------- wallets ---------- */
+.wallets{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.card{position:relative;padding:24px;border-radius:var(--radius);background:linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.02));border:1px solid var(--line);backdrop-filter:blur(18px);overflow:hidden;transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .35s}
+.card:hover{transform:translateY(-6px);border-color:color-mix(in srgb,var(--c) 60%,transparent)}
+.card::before{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:var(--c);filter:blur(70px);opacity:.28;top:-90px;left:-70px;transition:opacity .35s}
+.card:hover::before{opacity:.5}
+.head{position:relative;display:flex;align-items:center;gap:14px}
+.coin{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-weight:900;font-size:20px;color:#fff;background:var(--c);box-shadow:0 10px 30px -8px var(--c)}
+.head h3{font-size:19px;font-weight:800;line-height:1.4}
+.net{display:inline-block;font-size:12px;padding:2px 10px;border-radius:999px;background:var(--glass2);color:var(--muted);margin-top:2px;direction:ltr}
+.chips{position:relative;display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;direction:ltr;justify-content:center}
+.chip{font:700 12px ui-monospace,Consolas,monospace;padding:4px 12px;border-radius:999px;background:color-mix(in srgb,var(--c) 22%,transparent);border:1px solid color-mix(in srgb,var(--c) 45%,transparent)}
+.qr{position:relative;margin:20px auto 16px;width:176px;height:176px;padding:12px;border-radius:20px;background:#fff;display:grid;place-items:center}
+.qr svg{width:100%;height:100%}
+.addr{position:relative;display:flex;align-items:center;gap:8px;padding:10px 10px 10px 14px;border-radius:16px;background:rgba(0,0,0,.35);border:1px solid var(--line)}
+.addr code{flex:1;direction:ltr;text-align:left;font:500 12.5px ui-monospace,Consolas,monospace;color:#e9e4ff;word-break:break-all;line-height:1.5}
+.copy{flex:none;border:0;cursor:pointer;padding:9px 14px;border-radius:12px;font:700 13px "Vazirmatn";color:#fff;background:var(--c);transition:transform .15s,filter .2s}
+.copy:hover{filter:brightness(1.15)}
+.copy:active{transform:scale(.94)}
+.warn{position:relative;margin-top:12px;font-size:12.5px;color:#ffcf8a;display:flex;gap:6px}
+
+/* ---------- other links ---------- */
+.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:70px}
+.link{display:flex;align-items:center;gap:12px;padding:18px 20px;border-radius:20px;background:var(--glass);border:1px solid var(--line);text-decoration:none;transition:.25s;backdrop-filter:blur(12px)}
+.link:hover{background:var(--glass2);transform:translateY(-3px)}
+.link .ic{font-size:24px}
+.link small{display:block;color:var(--muted);font-size:12px}
+.soon{opacity:.55;pointer-events:none}
+
+/* ---------- thanks ---------- */
+.thanks{margin-top:80px;padding:44px 26px;border-radius:32px;text-align:center;background:linear-gradient(135deg,rgba(124,92,255,.22),rgba(255,107,107,.18));border:1px solid var(--line)}
+.thanks h2{font-size:clamp(22px,3.4vw,32px);font-weight:900;margin-bottom:8px}
+.thanks p{color:var(--muted)}
+footer{text-align:center;color:var(--muted);font-size:13px;margin-top:40px}
+
+/* ---------- toast ---------- */
+.toast{position:fixed;bottom:28px;left:50%;transform:translate(-50%,120px);padding:12px 22px;border-radius:999px;background:#fff;color:#1a1530;font-weight:800;box-shadow:0 20px 50px -10px rgba(0,0,0,.6);transition:transform .35s cubic-bezier(.2,.9,.3,1.3);z-index:9}
+.toast.show{transform:translate(-50%,0)}
+
+@media (max-width:640px){.stats{grid-template-columns:1fr}.toy{display:none}.hero{padding-top:50px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="sky"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+<div class="grid"></div>
+<canvas id="stars"></canvas>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><div class="logo">🎮</div><span>Saba Game Studio</span></div>
+    <button class="lang" id="langBtn">English</button>
+  </header>
+
+  <section class="hero">
+    <div class="toys">
+      <span class="toy" style="right:4%;top:-20px">🦖</span>
+      <span class="toy" style="left:6%;top:40px;animation-delay:-2s">🕹️</span>
+      <span class="toy" style="right:12%;top:230px;animation-delay:-4s">⭐</span>
+      <span class="toy" style="left:14%;top:260px;animation-delay:-3s">🚀</span>
+    </div>
+    <span class="pill"><i class="dot"></i><span data-fa="سازنده مستقل بازی‌های آموزشی" data-en="Indie maker of educational games">سازنده مستقل بازی‌های آموزشی</span></span>
+    <h1><span data-fa="با هم بازی‌های" data-en="Let&#x27;s build">با هم بازی‌های</span><br><span class="grad"><span data-fa="جادویی بسازیم" data-en="magical games together">جادویی بسازیم</span></span></h1>
+    <p class="lead"><span data-fa="هر دونیت کوچک، یک قدم به بازی بعدی نزدیک‌ترمان می‌کند؛ بازی‌های سه‌بعدی، آموزشی و نوستالژیک برای بچه‌ها و بزرگ‌ترها." data-en="Every small donation brings the next game closer: 3D, educational and nostalgic games for kids and grown-ups.">هر دونیت کوچک، یک قدم به بازی بعدی نزدیک‌ترمان می‌کند؛ بازی‌های سه‌بعدی، آموزشی و نوستالژیک برای بچه‌ها و بزرگ‌ترها.</span></p>
+    <a href="#donate" class="cta" onclick="document.getElementById('donate').scrollIntoView({behavior:'smooth'});return false;"><span class="heart">💖</span><span data-fa="همین حالا حمایت کنید" data-en="Support now">همین حالا حمایت کنید</span></a>
+  </section>
+
+  <div class="stats">
+    <div class="stat"><b>🎯</b><span data-fa="بازی‌های مستقل و بدون تبلیغ" data-en="Indie games, no ads">بازی‌های مستقل و بدون تبلیغ</span></div>
+    <div class="stat"><b>🧒</b><span data-fa="آموزشی و امن برای کودکان" data-en="Educational and kid-safe">آموزشی و امن برای کودکان</span></div>
+    <div class="stat"><b>🆓</b><span data-fa="نسخه‌های رایگان برای همه" data-en="Free versions for everyone">نسخه‌های رایگان برای همه</span></div>
+  </div>
+
+  <section id="donate">
+    <h2 class="sec-title"><span data-fa="حمایت با رمزارز" data-en="Donate with crypto">حمایت با رمزارز</span></h2>
+    <p class="sec-sub"><span data-fa="شبکه را انتخاب کنید، آدرس را کپی یا QR را اسکن کنید. هر آدرس همه توکن‌های نوشته‌شده روی کارتش را می‌پذیرد." data-en="Pick a network, then copy the address or scan the QR. Each address accepts every token listed on its card.">شبکه را انتخاب کنید، آدرس را کپی یا QR را اسکن کنید. هر آدرس همه توکن‌های نوشته‌شده روی کارتش را می‌پذیرد.</span></p>
+    <div class="wallets" id="wallets">
+<article class="card" style="--c:#ff3b3b"><div class="head"><div class="coin">T</div><div><h3>Tron</h3><span class="net">TRC20 · Tron</span></div></div>
+<div class="chips"><span class="chip">USDT</span><span class="chip">TRX</span></div><div class="qr"><svg width="145" height="145" class="segno"><path transform="scale(5)" class="qrline" stroke="#120d24" d="M0 0.5h7m1 0h5m2 0h3m2 0h1m1 0h7m-29 1h1m5 0h1m1 0h3m1 0h1m1 0h2m1 0h1m2 0h1m1 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m2 0h1m1 0h1m1 0h3m2 0h2m2 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h3m9 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m2 0h1m2 0h2m4 0h1m3 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m3 0h3m1 0h1m1 0h1m2 0h2m1 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-21 1h1m1 0h1m2 0h2m2 0h1m2 0h1m-21 1h1m1 0h2m1 0h3m3 0h4m1 0h2m1 0h2m1 0h1m2 0h1m1 0h2m-28 1h1m1 0h2m3 0h5m2 0h1m1 0h1m1 0h1m1 0h1m1 0h3m1 0h2m-27 1h1m2 0h3m2 0h1m1 0h1m1 0h1m1 0h2m2 0h1m1 0h4m1 0h1m-26 1h3m3 0h2m2 0h3m1 0h1m3 0h2m1 0h2m2 0h2m-29 1h1m1 0h1m3 0h4m2 0h1m3 0h2m1 0h1m6 0h1m1 0h1m-29 1h2m3 0h1m1 0h1m1 0h3m1 0h1m1 0h1m3 0h1m5 0h2m-25 1h1m3 0h1m1 0h2m1 0h2m1 0h1m4 0h3m2 0h1m1 0h3m-29 1h1m1 0h4m1 0h1m1 0h2m2 0h1m4 0h1m2 0h2m1 0h2m1 0h2m-28 1h1m1 0h2m1 0h1m1 0h2m6 0h1m2 0h1m1 0h1m2 0h1m3 0h1m-24 1h1m1 0h2m3 0h2m3 0h2m2 0h3m1 0h1m2 0h1m-29 1h1m1 0h2m1 0h2m1 0h1m2 0h1m3 0h2m1 0h1m2 0h2m2 0h2m-24 1h2m2 0h2m1 0h1m4 0h1m1 0h1m2 0h2m1 0h1m2 0h1m-26 1h3m1 0h4m1 0h1m1 0h2m1 0h4m1 0h5m1 0h3m-21 1h3m1 0h3m1 0h1m2 0h2m3 0h1m1 0h1m-27 1h7m1 0h2m1 0h3m3 0h2m1 0h1m1 0h1m1 0h1m1 0h2m-28 1h1m5 0h1m1 0h1m1 0h3m3 0h1m3 0h1m3 0h1m-25 1h1m1 0h3m1 0h1m2 0h1m1 0h1m2 0h1m2 0h1m2 0h6m1 0h1m-28 1h1m1 0h3m1 0h1m1 0h1m4 0h2m1 0h1m2 0h3m1 0h1m1 0h2m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h2m3 0h2m2 0h1m1 0h2m1 0h2m1 0h2m1 0h1m-29 1h1m5 0h1m4 0h2m5 0h2m5 0h1m1 0h1m-28 1h7m1 0h1m1 0h1m2 0h1m2 0h1m1 0h3m2 0h5"/></svg></div>
+<div class="addr"><code>TJMggc8VZBrnKNYDYX9n1PYX8h8tjsHkS9</code><button class="copy" data-addr="TJMggc8VZBrnKNYDYX9n1PYX8h8tjsHkS9"><span data-fa="کپی" data-en="Copy">کپی</span></button></div>
+<div class="warn">⚠️ <span data-fa="فقط روی شبکه TRC20 · Tron ارسال کنید؛ ارسال روی شبکه دیگر از بین می‌رود." data-en="Send only on TRC20 · Tron. Other networks will lose funds.">فقط روی شبکه TRC20 · Tron ارسال کنید؛ ارسال روی شبکه دیگر از بین می‌رود.</span></div></article>
+<article class="card" style="--c:#f0b90b"><div class="head"><div class="coin">B</div><div><h3>BNB Smart Chain</h3><span class="net">BEP20 · BSC</span></div></div>
+<div class="chips"><span class="chip">USDT</span><span class="chip">BNB</span><span class="chip">USDC</span></div><div class="qr"><svg width="145" height="145" class="segno"><path transform="scale(5)" class="qrline" stroke="#120d24" d="M0 0.5h7m3 0h3m1 0h1m3 0h1m1 0h1m1 0h7m-29 1h1m5 0h1m4 0h5m6 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m1 0h5m3 0h1m2 0h1m2 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m1 0h3m1 0h2m1 0h1m2 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h4m4 0h1m1 0h2m2 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m1 0h1m1 0h1m2 0h1m1 0h4m3 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-21 1h1m1 0h2m3 0h2m2 0h2m-21 1h1m1 0h5m6 0h6m1 0h1m1 0h5m-27 1h2m1 0h1m1 0h1m1 0h1m3 0h2m6 0h1m2 0h1m1 0h1m2 0h2m-29 1h2m2 0h3m1 0h2m1 0h1m1 0h3m2 0h1m6 0h2m-27 1h1m2 0h1m3 0h2m1 0h1m1 0h1m2 0h1m3 0h1m1 0h1m1 0h3m1 0h2m-29 1h1m2 0h5m1 0h1m1 0h2m1 0h5m2 0h1m5 0h1m-28 1h1m1 0h2m4 0h1m2 0h2m7 0h1m1 0h4m2 0h1m-29 1h2m2 0h1m1 0h1m2 0h1m1 0h5m1 0h1m3 0h1m1 0h1m2 0h2m-28 1h4m1 0h1m3 0h2m1 0h1m2 0h1m8 0h2m1 0h1m-28 1h5m1 0h1m1 0h2m1 0h3m1 0h4m1 0h2m1 0h1m2 0h3m-29 1h1m4 0h1m3 0h3m2 0h1m4 0h1m2 0h1m1 0h2m2 0h1m-29 1h1m1 0h2m2 0h1m2 0h1m1 0h2m2 0h3m3 0h1m1 0h2m1 0h1m-27 1h1m1 0h4m2 0h2m1 0h2m1 0h1m7 0h1m1 0h1m2 0h1m-28 1h1m1 0h2m2 0h1m4 0h1m1 0h1m1 0h1m4 0h8m-20 1h1m1 0h1m1 0h1m1 0h3m1 0h3m3 0h1m1 0h1m1 0h1m-29 1h7m3 0h2m1 0h1m1 0h1m3 0h2m1 0h1m1 0h1m2 0h1m-28 1h1m5 0h1m1 0h2m4 0h2m4 0h1m3 0h1m2 0h2m-29 1h1m1 0h3m1 0h1m1 0h1m2 0h1m4 0h3m1 0h9m-29 1h1m1 0h3m1 0h1m1 0h1m4 0h1m7 0h1m4 0h3m-29 1h1m1 0h3m1 0h1m1 0h3m2 0h1m1 0h1m1 0h1m1 0h1m2 0h3m2 0h1m-28 1h1m5 0h1m2 0h6m1 0h1m1 0h4m1 0h3m1 0h1m-28 1h7m1 0h1m1 0h2m1 0h1m1 0h1m1 0h1m3 0h1m2 0h1"/></svg></div>
+<div class="addr"><code>0x2cFf88Aa3f4130400B62Ec177E6f8C005f6BfF13</code><button class="copy" data-addr="0x2cFf88Aa3f4130400B62Ec177E6f8C005f6BfF13"><span data-fa="کپی" data-en="Copy">کپی</span></button></div>
+<div class="warn">⚠️ <span data-fa="فقط روی شبکه BEP20 · BSC ارسال کنید؛ ارسال روی شبکه دیگر از بین می‌رود." data-en="Send only on BEP20 · BSC. Other networks will lose funds.">فقط روی شبکه BEP20 · BSC ارسال کنید؛ ارسال روی شبکه دیگر از بین می‌رود.</span></div></article>
+<article class="card" style="--c:#0098ea"><div class="head"><div class="coin">◆</div><div><h3>TON</h3><span class="net">TON</span></div></div>
+<div class="chips"><span class="chip">TON</span><span class="chip">USDT</span></div><div class="qr"><svg width="165" height="165" class="segno"><path transform="scale(5)" class="qrline" stroke="#120d24" d="M0 0.5h7m4 0h1m1 0h1m2 0h2m1 0h1m1 0h1m1 0h1m2 0h7m-33 1h1m5 0h1m1 0h1m7 0h1m1 0h1m1 0h1m5 0h1m5 0h1m-33 1h1m1 0h3m1 0h1m1 0h2m2 0h1m1 0h2m3 0h1m1 0h1m2 0h1m1 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m1 0h1m2 0h2m1 0h1m1 0h1m1 0h1m1 0h1m2 0h1m2 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m3 0h1m1 0h1m1 0h3m3 0h3m3 0h1m1 0h3m1 0h1m-33 1h1m5 0h1m3 0h1m1 0h1m2 0h1m1 0h1m1 0h1m2 0h1m1 0h1m1 0h1m5 0h1m-33 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-25 1h1m1 0h1m3 0h3m1 0h3m3 0h1m-25 1h1m5 0h1m1 0h2m1 0h1m1 0h1m5 0h2m1 0h1m2 0h2m2 0h3m-31 1h1m2 0h1m2 0h1m2 0h1m1 0h2m3 0h2m2 0h1m1 0h6m1 0h2m-31 1h2m1 0h4m1 0h1m3 0h5m2 0h1m1 0h1m1 0h1m3 0h4m-32 1h1m8 0h1m1 0h1m1 0h1m1 0h1m1 0h4m1 0h1m1 0h7m1 0h1m-30 1h4m5 0h2m1 0h1m1 0h1m1 0h1m1 0h1m4 0h5m-30 1h1m1 0h3m1 0h3m3 0h1m4 0h1m3 0h2m3 0h1m3 0h1m-31 1h1m1 0h1m2 0h5m2 0h1m1 0h4m1 0h3m1 0h1m1 0h6m-32 1h2m1 0h3m4 0h3m3 0h1m3 0h1m2 0h10m-33 1h2m1 0h1m1 0h2m1 0h3m1 0h1m1 0h2m1 0h2m1 0h1m1 0h1m1 0h1m2 0h5m-32 1h6m2 0h2m4 0h1m1 0h1m3 0h1m2 0h1m1 0h3m2 0h1m-26 1h2m3 0h4m1 0h5m1 0h3m3 0h1m1 0h1m2 0h1m-29 1h1m2 0h3m3 0h2m1 0h1m3 0h1m3 0h1m2 0h1m1 0h2m-30 1h1m2 0h1m1 0h3m2 0h3m1 0h1m2 0h1m4 0h1m1 0h1m2 0h1m1 0h1m-31 1h1m2 0h3m4 0h5m6 0h1m1 0h1m4 0h5m-33 1h1m3 0h1m1 0h1m2 0h3m2 0h1m4 0h1m4 0h1m4 0h3m-32 1h1m1 0h1m1 0h1m4 0h3m2 0h3m2 0h2m1 0h1m1 0h1m1 0h1m2 0h2m-31 1h2m3 0h2m3 0h5m5 0h1m2 0h6m2 0h2m-25 1h3m1 0h1m1 0h4m1 0h2m2 0h2m3 0h2m1 0h2m-33 1h7m4 0h1m2 0h2m1 0h1m2 0h1m1 0h3m1 0h1m1 0h4m-32 1h1m5 0h1m2 0h3m1 0h2m2 0h2m1 0h1m1 0h1m1 0h1m3 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m2 0h2m4 0h2m2 0h1m1 0h1m2 0h5m1 0h1m-31 1h1m1 0h3m1 0h1m2 0h1m1 0h2m1 0h1m3 0h1m5 0h2m5 0h2m-33 1h1m1 0h3m1 0h1m2 0h1m1 0h1m1 0h1m1 0h1m3 0h2m1 0h3m3 0h2m1 0h2m-33 1h1m5 0h1m3 0h1m1 0h3m3 0h1m3 0h3m2 0h1m1 0h2m-31 1h7m1 0h2m2 0h1m1 0h2m4 0h1m2 0h3m2 0h4"/></svg></div>
+<div class="addr"><code>UQBMMFoY2p9h9Tukc9eWSVC5vDtCA10pNyUzQ6CLaPrpP_P6</code><button class="copy" data-addr="UQBMMFoY2p9h9Tukc9eWSVC5vDtCA10pNyUzQ6CLaPrpP_P6"><span data-fa="کپی" data-en="Copy">کپی</span></button></div>
+<div class="warn">⚠️ <span data-fa="فقط روی شبکه TON ارسال کنید؛ ارسال روی شبکه دیگر از بین می‌رود." data-en="Send only on TON. Other networks will lose funds.">فقط روی شبکه TON ارسال کنید؛ ارسال روی شبکه دیگر از بین می‌رود.</span></div></article>
+<article class="card" style="--c:#9945ff"><div class="head"><div class="coin">S</div><div><h3>Solana</h3><span class="net">Solana</span></div></div>
+<div class="chips"><span class="chip">SOL</span><span class="chip">USDC</span><span class="chip">USDT</span></div><div class="qr"><svg width="165" height="165" class="segno"><path transform="scale(5)" class="qrline" stroke="#120d24" d="M0 0.5h7m2 0h1m1 0h2m1 0h3m1 0h1m1 0h5m1 0h7m-33 1h1m5 0h1m1 0h2m1 0h1m2 0h4m3 0h1m1 0h1m2 0h1m5 0h1m-33 1h1m1 0h3m1 0h1m1 0h4m1 0h2m1 0h1m2 0h1m4 0h1m1 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m4 0h2m2 0h2m1 0h1m3 0h1m3 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m2 0h2m2 0h1m2 0h2m2 0h1m3 0h1m1 0h1m1 0h3m1 0h1m-33 1h1m5 0h1m11 0h2m2 0h1m1 0h1m1 0h1m5 0h1m-33 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-24 1h4m2 0h1m1 0h1m2 0h1m1 0h1m1 0h1m-24 1h3m1 0h2m7 0h1m1 0h3m2 0h2m1 0h1m5 0h2m-32 1h3m7 0h1m1 0h3m2 0h1m1 0h2m1 0h6m3 0h2m-32 1h2m1 0h1m1 0h2m3 0h2m3 0h1m1 0h1m2 0h4m2 0h6m-33 1h2m1 0h1m4 0h2m2 0h1m1 0h2m1 0h1m2 0h1m1 0h1m2 0h1m1 0h3m2 0h1m-31 1h1m1 0h3m2 0h3m4 0h1m3 0h1m1 0h1m1 0h2m2 0h1m-29 1h2m1 0h2m3 0h1m1 0h6m1 0h1m1 0h3m1 0h2m4 0h1m1 0h2m-33 1h1m1 0h1m1 0h4m2 0h3m6 0h1m2 0h1m7 0h1m-31 1h3m1 0h2m4 0h1m3 0h1m2 0h2m2 0h1m1 0h3m1 0h4m1 0h1m-33 1h1m1 0h1m3 0h2m2 0h2m1 0h1m1 0h2m2 0h1m1 0h1m1 0h5m1 0h1m1 0h2m-33 1h1m2 0h1m3 0h1m1 0h1m2 0h1m1 0h1m2 0h2m2 0h1m1 0h1m3 0h3m-27 1h1m1 0h3m6 0h2m1 0h2m1 0h2m7 0h3m-32 1h1m3 0h2m2 0h1m4 0h2m2 0h4m1 0h2m1 0h3m3 0h1m-32 1h2m3 0h2m1 0h1m1 0h1m4 0h1m2 0h4m1 0h1m1 0h1m1 0h2m-29 1h2m3 0h1m1 0h1m1 0h8m1 0h1m1 0h1m4 0h2m2 0h2m-28 1h5m2 0h1m5 0h3m1 0h1m2 0h2m4 0h4m-32 1h1m1 0h1m1 0h1m1 0h3m2 0h2m1 0h5m2 0h1m1 0h4m1 0h1m1 0h1m-32 1h1m1 0h1m2 0h2m1 0h1m2 0h2m2 0h8m1 0h5m2 0h2m-25 1h1m2 0h2m1 0h2m2 0h1m3 0h3m3 0h5m-33 1h7m2 0h1m1 0h3m1 0h1m3 0h1m1 0h1m1 0h2m1 0h1m1 0h3m-31 1h1m5 0h1m1 0h3m3 0h1m2 0h1m3 0h4m3 0h4m-32 1h1m1 0h3m1 0h1m4 0h1m1 0h1m1 0h5m2 0h8m-30 1h1m1 0h3m1 0h1m1 0h1m5 0h1m1 0h1m2 0h2m3 0h1m2 0h3m1 0h2m-33 1h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h1m4 0h1m5 0h1m5 0h2m-31 1h1m5 0h1m1 0h1m1 0h7m1 0h3m1 0h1m2 0h2m1 0h1m3 0h1m-33 1h7m4 0h2m1 0h1m1 0h2m2 0h1m2 0h1m2 0h1"/></svg></div>
+<div class="addr"><code>FZeKJUW5ZNi14188SXS7aDyWSrFeLZ8a7UBGsnigZXX8</code><button class="copy" data-addr="FZeKJUW5ZNi14188SXS7aDyWSrFeLZ8a7UBGsnigZXX8"><span data-fa="کپی" data-en="Copy">کپی</span></button></div>
+<div class="warn">⚠️ <span data-fa="فقط روی شبکه Solana ارسال کنید؛ ارسال روی شبکه دیگر از بین می‌رود." data-en="Send only on Solana. Other networks will lose funds.">فقط روی شبکه Solana ارسال کنید؛ ارسال روی شبکه دیگر از بین می‌رود.</span></div></article>
+</div>
+  </section>
+
+  <section class="links" id="links"><div class="link soon"><span class="ic">☕</span><span><span data-fa="قهوه مهمانم کنید" data-en="Buy me a coffee">قهوه مهمانم کنید</span><small><span data-fa="به‌زودی" data-en="Coming soon">به‌زودی</span></small></span></div><div class="link soon"><span class="ic">🎁</span><span><span data-fa="حامی ماهانه شوید" data-en="Monthly support">حامی ماهانه شوید</span><small><span data-fa="به‌زودی" data-en="Coming soon">به‌زودی</span></small></span></div><div class="link soon"><span class="ic">🐙</span><span><span data-fa="بازی‌ها در GitHub" data-en="Games on GitHub">بازی‌ها در GitHub</span><small><span data-fa="به‌زودی" data-en="Coming soon">به‌زودی</span></small></span></div></section>
+
+  <section class="thanks">
+    <h2><span data-fa="از ته دل ممنونیم 💛" data-en="Thank you from the heart 💛">از ته دل ممنونیم 💛</span></h2>
+    <p><span data-fa="حمایت شما مستقیم صرف ساخت، طراحی و انتشار بازی‌های تازه می‌شود." data-en="Your support goes straight into building, designing and releasing new games.">حمایت شما مستقیم صرف ساخت، طراحی و انتشار بازی‌های تازه می‌شود.</span></p>
+  </section>
+
+  <footer>© 2026 Saba Game Studio · <span data-fa="ساخته شده با عشق" data-en="Made with love">ساخته شده با عشق</span></footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+var lang=localStorage.getItem("sgs-lang")||"fa",msg={fa:"آدرس کپی شد ✓",en:"Address copied ✓"};
+function apply(){document.documentElement.lang=lang;document.documentElement.dir=lang=="fa"?"rtl":"ltr";
+ document.querySelectorAll("[data-fa]").forEach(function(e){e.textContent=e.getAttribute("data-"+lang)});
+ document.getElementById("langBtn").textContent=lang=="fa"?"English":"فارسی";}
+document.getElementById("langBtn").onclick=function(){lang=lang=="fa"?"en":"fa";try{localStorage.setItem("sgs-lang",lang)}catch(e){}apply();};
+function toast(m){var t=document.getElementById("toast");t.textContent=m;t.classList.add("show");clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove("show")},1800);}
+document.querySelectorAll(".copy").forEach(function(b){b.onclick=function(){var a=b.getAttribute("data-addr");
+ function fb(){var ta=document.createElement("textarea");ta.value=a;document.body.appendChild(ta);ta.select();try{document.execCommand("copy")}catch(e){}ta.remove();toast(msg[lang]);}
+ if(navigator.clipboard)navigator.clipboard.writeText(a).then(function(){toast(msg[lang])},fb);else fb();};});
+var cv=document.getElementById("stars"),cx=cv.getContext("2d"),S=[],still=matchMedia("(prefers-reduced-motion: reduce)").matches;
+function size(){var d=devicePixelRatio||1;cv.width=innerWidth*d;cv.height=innerHeight*d;S=[];for(var i=0;i<Math.min(140,innerWidth/8);i++)S.push({x:Math.random()*cv.width,y:Math.random()*cv.height,r:(Math.random()*1.4+.3)*d,p:Math.random()*6.28});}
+function draw(t){cx.clearRect(0,0,cv.width,cv.height);S.forEach(function(s){cx.fillStyle="rgba(255,255,255,"+(.35+.35*Math.sin(t/900+s.p))+")";cx.beginPath();cx.arc(s.x,s.y,s.r,0,6.28);cx.fill();});if(!still)requestAnimationFrame(draw);}
+size();addEventListener("resize",size);requestAnimationFrame(draw);
+try{if(localStorage.getItem("sgs-lang")=="en")apply();}catch(e){}
+})();
+</script>
+</body>
+</html>
